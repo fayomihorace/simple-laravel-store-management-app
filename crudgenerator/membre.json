@@ -1,0 +1,24 @@
+{
+    "fields": [
+        {
+            "name": "nom",
+            "type": "string"
+        },
+        {
+            "name": "prenom",
+            "type": "text"
+        },
+        {
+            "name": "adresse",
+            "type": "text"
+        },
+        {
+            "name": "email",
+            "type": "string"
+        },
+        {
+            "name": "telephone",
+            "type": "string"
+        }
+    ]
+}

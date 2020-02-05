@@ -1,0 +1,30 @@
+php artisan crud:generate geststock_Location --fields_from_file="crudgenerator/location.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+
+
+
+php artisan crud:generate Categorie --fields_from_file="crudgenerator/categorie.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+php artisan crud:generate Magazin --fields_from_file="crudgenerator/magazin.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+php artisan crud:generate Membre --fields_from_file="crudgenerator/membre.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+php artisan crud:generate Responsable --fields_from_file="crudgenerator/responsable.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+php artisan crud:generate Fournisseur --fields_from_file="crudgenerator/fournisseur.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+
+php artisan crud:generate Operation --fields_from_file="crudgenerator/operation.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+
+php artisan crud:generate Produit --fields_from_file="crudgenerator/produit.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+php artisan crud:generate ProduitMagazin --fields_from_file="crudgenerator/produit_magazin.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+
+php artisan crud:generate Mouvement --fields_from_file="crudgenerator/mouvement.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+
+php artisan crud:generate AjoutStock --fields_from_file="crudgenerator/ajoutstock.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+php artisan crud:generate Image --fields_from_file="crudgenerator/image.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html

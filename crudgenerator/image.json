@@ -1,0 +1,27 @@
+{
+    "fields": [
+        {
+            "name": "lien",
+            "type": "string"
+        },
+        {
+            "name": "produit",
+            "type": "integer#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "produit",
+            "references": "id",
+            "on": "geststock_produits",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "geststock_produits",
+            "type": "belongsTo",
+            "class": "App\\Produit"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+storage
+bootstrap
+database
+vendor
+.idea
+tests
+Homestead.json
+Homestead.yaml
+.env
+bower_components
+node_modules
+public
+public.zip
+

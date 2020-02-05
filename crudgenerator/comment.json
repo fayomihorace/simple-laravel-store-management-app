@@ -1,0 +1,46 @@
+{
+    "fields": [
+        {
+            "name": "title",
+            "type": "string"
+        },
+        {
+            "name": "content",
+            "type": "text"
+        },
+        {
+            "name": "category",
+            "type": "select",
+            "options": {
+                "technology": "Technology",
+                "tips": "Tips",
+                "health": "Health"
+            }
+        },
+        {
+            "name": "post_id",
+            "type": "integer#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "post_id",
+            "references": "id",
+            "on": "posts",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "posts",
+            "type": "belongsTo",
+            "class": "App\\Post"
+        }
+    ],
+    "validations": [
+        {
+            "field": "title",
+            "rules": "required|max:10"
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+{
+    "fields": [
+        {
+            "name": "type",
+            "type": "select",
+            "options": {
+                "technology": "Entrée de stock",
+                "tips": "Sortie de stock"
+            }
+        },
+        {
+            "name": "produit",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "quantite",
+            "type": "integer"
+        },
+        {
+            "name": "magazin",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "operation",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "description",
+            "type": "text"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "produit",
+            "references": "id",
+            "on": "produits",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "magazin",
+            "references": "id",
+            "on": "magazins",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "operation",
+            "references": "id",
+            "on": "operations",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "produits",
+            "type": "belongsTo",
+            "class": "App\\Produit"
+        },
+        {
+            "name": "operations",
+            "type": "belongsTo",
+            "class": "App\\Operation"
+        },
+        {
+            "name": "magazins",
+            "type": "belongsTo",
+            "class": "App\\Magazin"
+        }
+    ]
+}

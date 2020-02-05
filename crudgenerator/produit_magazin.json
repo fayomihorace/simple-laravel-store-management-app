@@ -1,0 +1,42 @@
+{
+    "fields": [
+        {
+            "name": "produit",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "magazin",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "stock",
+            "type": "integer#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "produit",
+            "references": "id",
+            "on": "produits",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "magazin",
+            "references": "id",
+            "on": "magazins",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "produits",
+            "type": "belongsTo",
+            "class": "App\\Produit"
+        },
+        {
+            "name": "magazins",
+            "type": "belongsTo",
+            "class": "App\\Magazin"
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+{
+    "fields": [
+        {
+            "name": "produit",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "quantite",
+            "type": "integer"
+        },
+        {
+            "name": "prix",
+            "type": "integer"
+        },
+        {
+            "name": "magazin",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "fournisseur",
+            "type": "integer#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "produit",
+            "references": "id",
+            "on": "produits",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "fournisseur",
+            "references": "id",
+            "on": "fournisseurs",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "magazin",
+            "references": "id",
+            "on": "magazins",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "produits",
+            "type": "belongsTo",
+            "class": "App\\Produit"
+        },
+        {
+            "name": "fournisseurs",
+            "type": "belongsTo",
+            "class": "App\\Fournisseur"
+        },
+        {
+            "name": "magazins",
+            "type": "belongsTo",
+            "class": "App\\Magazin"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "fields": [
+        {
+            "name": "nom",
+            "type": "string"
+        },
+        {
+            "name": "description",
+            "type": "text"
+        }
+    ]
+}

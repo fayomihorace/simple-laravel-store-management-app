@@ -1,0 +1,42 @@
+{
+    "fields": [
+        {
+            "name": "reference",
+            "type": "string"
+        },
+        {
+            "name": "membre",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "responsable",
+            "type": "integer#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "membre",
+            "references": "id",
+            "on": "membres",
+            "onDelete": "cascade"
+        },
+        {
+            "column": "responsable",
+            "references": "id",
+            "on": "responsables",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "membres",
+            "type": "belongsTo",
+            "class": "App\\Membre"
+        },
+        {
+            "name": "responsables",
+            "type": "belongsTo",
+            "class": "App\\Responsable"
+        }
+    ]
+}

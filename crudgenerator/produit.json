@@ -1,0 +1,39 @@
+{
+    "fields": [
+        {
+            "name": "nom",
+            "type": "string"
+        },
+        {
+            "name": "categorie",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "description",
+            "type": "text"
+        },
+        {
+            "name": "stock",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "stock_details",
+            "type": "text"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "categorie",
+            "references": "id",
+            "on": "categories",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "geststockCategories",
+            "type": "belongsTo",
+            "class": "App\\Categorie"
+        }
+    ]
+}
