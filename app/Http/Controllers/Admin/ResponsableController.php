@@ -105,7 +105,7 @@ class ResponsableController extends Controller
         $responsable = Responsable::findOrFail($id);
         $responsable->update($requestData);
 
-        return redirect('admin/responsable')->with('flash_message', 'Responsable updated!');
+        return redirect('admin/responsable')->with('flash_message', 'Responsable modifié!');
     }
 
     /**

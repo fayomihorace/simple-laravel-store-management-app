@@ -107,7 +107,7 @@ class ImageController extends Controller
         $image = Image::findOrFail($id);
         $image->update($requestData);
 
-        return redirect('admin/image')->with('flash_message', 'Image updated!');
+        return redirect('admin/image')->with('flash_message', 'Image modifiée!');
     }
 
     /**

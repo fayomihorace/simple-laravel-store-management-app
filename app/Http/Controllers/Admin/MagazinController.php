@@ -106,7 +106,7 @@ class MagazinController extends Controller
         $magazin = Magazin::findOrFail($id);
         $magazin->update($requestData);
 
-        return redirect('admin/magazin')->with('flash_message', 'Magazin updated!');
+        return redirect('admin/magazin')->with('flash_message', 'Magazin modifié!');
     }
 
     /**
@@ -121,13 +121,12 @@ class MagazinController extends Controller
 
         if( Magazin::join("geststock_mouvements", "geststock_mouvements.magazin", "=", "geststock_magazins.id")
             ->where( ['geststock_magazins.id'=>  $id ])->exists()){
-            return redirect()->back()->with('error_message', 'Impossible de supprimer ce magasin car au moins un mouvement a été effectué avec un produit de ce magasin !!');  
+            return redirect()->back()->with('error_message', 'Impossible de supprimer ce magasin car au moins un mouvement a été effectué dans ce magasin !!');  
         }
-        if( Magazin::join("geststock_ajout_stocks", "geststock_ajout_stocks.produit", "=", "geststock_magazins.id")
+        if( Magazin::join("geststock_ajout_stocks", "geststock_ajout_stocks.magazin", "=", "geststock_magazins.id")
             ->where( ['geststock_magazins.id'=>  $id ])->exists()){
-            return redirect()->back()->with('error_message', 'Impossible de supprimer ce magasin car au moins un ajout de stock a été effectué avec ce produit de ce magasin !!');  
+            return redirect()->back()->with('error_message', 'Impossible de supprimer ce magasin car au moins un ajout de stock a été effectué dans ce magasin !!');  
         }
-        
         Magazin::destroy($id);
 
         return redirect('admin/magazin')->with('flash_message', 'Magasin supprimé!');

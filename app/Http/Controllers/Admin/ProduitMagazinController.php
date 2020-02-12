@@ -21,12 +21,17 @@ class ProduitMagazinController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $produitmagazin = ProduitMagazin::where('produit', 'LIKE', "%$keyword%")
+            $produitmagazin = ProduitMagazin::where('geststock_produit_magazins.produit', 'LIKE', "%$keyword%")
+            ->join("geststock_produits", "geststock_produits.id", "=", "geststock_produit_magazins.produit")
+            ->join("geststock_magazins", "geststock_magazins.id", "=", "geststock_produit_magazins.magazin")
+            ->select("geststock_produit_magazins.id", "geststock_produit_magazins.stock", 'geststock_produits.nom as produit', 'geststock_magazins.nom as magazin', 'geststock_produit_magazins.created_at')
                 ->orWhere('magazin', 'LIKE', "%$keyword%")
                 ->orWhere('stock', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $produitmagazin = ProduitMagazin::latest()->paginate($perPage);
+            $produitmagazin = ProduitMagazin::join("geststock_produits", "geststock_produits.id", "=", "geststock_produit_magazins.produit")
+            ->join("geststock_magazins", "geststock_magazins.id", "=", "geststock_produit_magazins.magazin")
+            ->select("geststock_produit_magazins.id", "geststock_produit_magazins.stock", 'geststock_produits.nom as produit', 'geststock_magazins.nom as magazin', 'geststock_produit_magazins.created_at')->orderby('geststock_magazins.nom','asc')->paginate($perPage);
         }
 
         return view('admin.produit-magazin.index', compact('produitmagazin'));
@@ -103,7 +108,7 @@ class ProduitMagazinController extends Controller
         $produitmagazin = ProduitMagazin::findOrFail($id);
         $produitmagazin->update($requestData);*/
 
-        return redirect('admin/produit-magazin')->with('flash_message', 'ProduitMagazin updated!');
+        return redirect('admin/produit-magazin')->with('flash_message', 'ProduitMagazin modifié!');
     }
 
     /**

@@ -46,20 +46,11 @@
                         <td>{{ $item->magazin }}</td>
                         <td>
                         @if(session('operation_is_end')== 'no')
-                            <!--a href="{{ url('/admin/mouvement/' . $item->id) }}" title="Voir Mouvement"><button
-                                    class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>
-                                    Voir</button></a>
-                            <a href="{{ url('/admin/mouvement/' . $item->id . '/edit' ) }}"
-                                title="Edit Mouvement"><button class="btn btn-primary btn-sm"><i
-                                        class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    Edit</button></a-->
-
-                            <form method="POST" action="{{ url('/admin/mouvement' . '/' . $item->id) }}"
+                            <form method="POST" action="{{ url('/admin/mouvement' . '/delete/' . $item->id) }}"
                                 accept-charset="UTF-8" style="display:inline">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
-                                <input type="hidden" name="operation" value="{{ $operation }}">
-                                <button type="submit" class="btn btn-danger btn-sm" title="Supprimer Mouvement"
+                                <button type="submit" action="POST" operation="{{$operation}}" class="btn btn-danger btn-sm" title="Supprimer Mouvement"
                                     onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o"
                                         aria-hidden="true"></i> Supprimer</button>
                             </form>

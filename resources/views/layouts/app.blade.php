@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/css/AdminLTE.min.css">
     <script src="/jquery.min.js"></script>
     <script src="/js/app.min.js"></script>
+    <script src="/js/print.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/sweetalert.min.js"></script>
 
@@ -116,26 +117,48 @@
 
     $('form button').attr('onclick','').click(function(e) {
         e.preventDefault()
-        const wrapper = document.createElement('div');
-        var action = $(this).parent().attr('action')
-        wrapper.innerHTML = '<form method="POST" action="'+action+'" accept-charset="UTF-8" style="display:inline">'+
-                            `<input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="_token" value="7RKP2BgnKDPLhiShWSNeq5L87uqFyrl7H49gVGFf">
-                            <button type="submit" class="btn btn-warning" style="color: white"  title="Supprimer AjoutStock" > Continuer </button>
-                                        
-                        </form>`;
-        swal({
-            title: "Attention, voulez vous vraiment continuer la suppression ?",
-            content: wrapper, 
-            icon: "warning",
-            buttons: false,
-        });
+        var action_="DELETE"
+        if($(this).attr('action')!= undefined) action_=$(this).attr('action')
+        if( $(this).find('i').hasClass('fa-search') ){ 
+        }
+        else{
+            const wrapper = document.createElement('div');
+            var action = $(this).parent().attr('action')
+            var token=$(this).prev().val()
+            wrapper.innerHTML = '<form method="POST" action="'+action+'" accept-charset="UTF-8" style="display:inline">'+
+                                    '<input type="hidden" name="_method" value="'+action_+'">'+
+                                    '<input type="hidden" name="_token" value="'+token+'">'+
+                                    '<input type="hidden" name="operation" value="'+$(this).attr('operation')+'">'+
+                                    `<button type="submit" class="btn btn-warning" style="color: white"  title="Supprimer AjoutStock" > Continuer </button>
+                                </form>`;
+            swal({
+                title: "Attention, voulez vous vraiment continuer la suppression ?",
+                content: wrapper, 
+                icon: "warning",
+                buttons: false,
+            });
+        } 
     })
     $('form').submit(function(e){
         if( $(this).attr('role')=="search" ){
             e.preventDefault()
         }
     })
+    $('.alert').each(function(){
+            var message= $(this).text().split(' ').join('').split('\n').join('')
+            if( message != "" ){
+                if($(this).hasClass('alert-success')){
+                    swal("Opération réussie !", $(this).text().split('\n').join('') , "success") 
+                    //$(this).remove()
+                }
+                else if($(this).hasClass('alert-danger')){
+                    swal("Oups !", $(this).text().split('\n').join('') , "error") 
+                   // $(this).remove()
+                }
+            }
+        })
+
+
     </script>
 </body>
 

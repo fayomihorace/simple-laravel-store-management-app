@@ -30,7 +30,7 @@ class OperationController extends Controller
         if (!empty($keyword)) {
             $operation = Operation::join("geststock_membres", "geststock_membres.id", "=", "geststock_operations.membre")
             ->join("geststock_responsables", "geststock_responsables.id", "=", "geststock_operations.responsable")
-            ->select("geststock_operations.id", "geststock_operations.end", 'geststock_responsables.nom as responsable', 'geststock_membres.nom as membre', 'geststock_responsables.prenom as responsable_prenom', 'geststock_membres.prenom as membre_prenom')
+            ->select("geststock_operations.id", "geststock_operations.end", 'geststock_responsables.nom as responsable', 'geststock_membres.nom as membre', 'geststock_responsables.prenom as responsable_prenom', 'geststock_membres.prenom as membre_prenom', 'geststock_operations.created_at')
             ->where('reference', 'LIKE', "%$keyword%")
                 ->orWhere('membre', 'LIKE', "%$keyword%")
                 ->orWhere('responsable', 'LIKE', "%$keyword%")
@@ -39,12 +39,13 @@ class OperationController extends Controller
         } else {
             $operation = Operation::join("geststock_membres", "geststock_membres.id", "=", "geststock_operations.membre")
             ->join("geststock_responsables", "geststock_responsables.id", "=", "geststock_operations.responsable")
-            ->select("geststock_operations.id", "geststock_operations.end", 'geststock_responsables.nom as responsable', 'geststock_membres.nom as membre', 'geststock_responsables.prenom as responsable_prenom', 'geststock_membres.prenom as membre_prenom')
+            ->select("geststock_operations.id", "geststock_operations.end", 'geststock_responsables.nom as responsable', 'geststock_membres.nom as membre', 'geststock_responsables.prenom as responsable_prenom', 'geststock_membres.prenom as membre_prenom', 'geststock_operations.created_at')
             ->orderby('geststock_operations.created_at','asc')
             ->paginate($perPage);
         }
         $membres = Membre::all();
         $responsables = Responsable::all();
+        
         return view('admin.operation.index', compact('operation'))->with(['membres'=> $membres, 'responsables'=> $responsables]) ;
     }
 
@@ -99,7 +100,7 @@ class OperationController extends Controller
         
         $mouvements = Mouvement::join("geststock_produits", "geststock_produits.id", "=", "geststock_mouvements.produit")
         ->join("geststock_magazins", "geststock_magazins.id", "=", "geststock_mouvements.magazin")
-        ->select("geststock_mouvements.type", "geststock_mouvements.quantite", 'geststock_magazins.nom as magazin', 'geststock_produits.nom as produit')
+        ->select("geststock_mouvements.type", 'geststock_mouvements.id', "geststock_mouvements.quantite", 'geststock_magazins.nom as magazin', 'geststock_produits.nom as produit')
         ->where(["geststock_mouvements.operation"=> $id])
         ->get();
         $produits= Produit::all();
@@ -153,13 +154,22 @@ class OperationController extends Controller
      */
     public function destroy($id)
     {
-        Operation::destroy($id);
+        $mouvements= Mouvement::where(['operation'=>$id])->get();
+        //dd($mouvements);
+        foreach ($mouvements as $mouvement ) {
+            app('App\Http\Controllers\Admin\MouvementController')->updateMouvement($mouvement);
+        }
         
+        Operation::destroy($id);
         return redirect('admin/operation')->with('flash_message', 'Operation supprimée!');
     }
 
     public function end($id)
     {
+        $number_of_mouvements=Mouvement::where(['operation'=>$id])->count();
+        
+        if($number_of_mouvements==0) return redirect()->back()->with('error_message', 'Vous devez ajouter au moins un mouvement avant de terminer l\'opération !');
+
         DB::connection(session::get('geststock_database'))->table('geststock_operations')
         ->where(['id' => $id ])
         ->update(['end' => 'yes' ]);

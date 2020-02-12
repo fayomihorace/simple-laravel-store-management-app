@@ -105,7 +105,7 @@ class MembreController extends Controller
         $membre = Membre::findOrFail($id);
         $membre->update($requestData);
 
-        return redirect('admin/membre')->with('flash_message', 'Membre updated!');
+        return redirect('admin/membre')->with('flash_message', 'Membre modifié!');
     }
 
     /**

@@ -118,7 +118,7 @@ class ProduitController extends Controller
         $produit = Produit::findOrFail($id);
         $produit->update($requestData);
 
-        return redirect('admin/produit')->with('flash_message', 'Produit updated!');
+        return redirect('admin/produit')->with('flash_message', 'Produit modifié!');
     }
 
     /**

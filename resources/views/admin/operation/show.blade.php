@@ -89,17 +89,23 @@
     </div>
 </div>
 
-<div class="modal fade" id="recuOperation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" id="recuOperation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel1"> Facture de l'opération </h4>
             </div>
             <div class="modal-body">
             <hr>
-                <a href="{{ url('/admin/operation/end') }}/{{ $operation->id }}" class="btn btn-primary">
+                <a href="#"  onclick="printJS('invoice_download', 'html')" class="btn btn-primary">
                         <i class="fa fa-download text-center" aria-hidden="true"></i> Télécharger
                 </a>
+                <div   id="invoice_download" >
+                    <h4 class="modal-title" id="exampleModalLabel1"> Facture de l'opération </h4>
+                    Cliquez sur le bouton valider pour terminer l'enregistrement de cette opération.
+                    Vous ne pourrez plus la supprimer ou la modifier.
+                    Vous serez en mesure de générer la facture correspondante. 
+                </div>
             </div>
         </div>
     </div>

@@ -104,7 +104,7 @@ class FournisseurController extends Controller
         $fournisseur = Fournisseur::findOrFail($id);
         $fournisseur->update($requestData);
 
-        return redirect('admin/fournisseur')->with('flash_message', 'Fournisseur updated!');
+        return redirect('admin/fournisseur')->with('flash_message', 'Fournisseur modifié!');
     }
 
     /**

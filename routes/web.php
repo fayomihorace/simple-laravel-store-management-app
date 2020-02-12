@@ -20,6 +20,8 @@ Route::get('user/logout', 'AuthController@logout')->name('user/logout');
 
 Route::get('get_name_by_id/{type}/{id}  ', 'RequestsController@get_name_by_id')->name('get_name_by_id');
 
+Route::post('admin/mouvement/delete/{id}  ', 'Admin\\MouvementController@destroy')->middleware('auth');
+
 
 //geststock_
 

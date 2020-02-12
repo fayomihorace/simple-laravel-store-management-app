@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header">Ajout stock</div>
                 <div class="card-body">
-                    <a href="#" data-toggle="modal" data-target="#createModal"  class="btn btn-success btn-sm"
+                    <a href="#" data-toggle="modal" data-target="#createAddStockModal"  class="btn btn-success btn-sm"
                         title="Ajouter Operation">
                         <i class="fa fa-plus" aria-hidden="true"></i> Ajouter
                     </a>
@@ -86,16 +86,23 @@
     </div>
 </div>
 
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+<div class="modal fade" id="createAddStockModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel1"> Ajout Stock </h4>
             </div>
-            <div class="modal-body">
-                @include ('admin.ajout-stock.create', ['magazins'=>$magazins, 'produits'=>$produits, 'fournisseurs'=>$fournisseurs])
+            <div class="modal-body"  action="{{ url('/admin/ajout-stock') }}" >
+                
+                    @include('admin.ajout-stock.create', ['magazins'=>$magazins, 'produits'=>$produits, 'fournisseurs'=>$fournisseurs])
+                
             </div>
         </div>
     </div>
 </div>
+<script src="/jquery.min.js"></script>
+<script>
+    var action=$('#createAddStockModal .modal-body').attr('action')
+    $('#createAddStockModal .modal-body').wrap('<form method="POST" action="'+action+'" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data"></form>')
+</script>
 @endsection

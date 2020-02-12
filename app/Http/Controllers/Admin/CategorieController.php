@@ -105,7 +105,7 @@ class CategorieController extends Controller
         $categorie = Categorie::findOrFail($id);
         $categorie->update($requestData);
 
-        return redirect('admin/categorie')->with('flash_message', 'Categorie updated!');
+        return redirect('admin/categorie')->with('flash_message', 'Categorie modifiée!');
     }
 
     /**

@@ -32,7 +32,7 @@
             <li class="header">NAVIGATION</li>
             <li class="treeview @if( Request::is('admin/produit*') || Request::is('admin/ajout*') || Request::is('admin/categorie*')   ) active @endif">
                 <a href="#">
-                    <i class="fa fa-briefcase"></i> <span>{{__('Produits') }} </span>
+                    <i class="fa fa-buttle"></i> <span>{{__('Produits') }} </span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -42,41 +42,33 @@
                             {{__('Liste Produits')}}</a></li>
                     <li class=" @if( Request::is('admin/ajout*') ) active @endif"><a href="{{ url('/admin/ajout-stock') }}"><i class="fa fa-circle-o"></i>
                             {{__('Ajout de Stock ')}}</a></li>
+                            <li class=" @if( Request::is('admin/produit-magazin*') ) active @endif"><a href="{{ url('/admin/produit-magazin') }}"><i class="fa fa-circle-o"></i>
+                            {{__('Produits / Magasin')}}</a></li>
                     <li class=" @if( Request::is('admin/categorie*')   ) active @endif"><a href="{{ url('/admin/categorie') }}"><i class="fa fa-circle-o"></i>
                             {{__('Categories')}}</a></li>        
                 </ul>
             </li>
             <li class="treeview @if( Request::is('admin/magazin*') || Request::is('admin/produit-magazin*') ) active @endif">
-                <a href="#">
-                    <i class="fa fa-truck"></i> <span>{{ __('Magazins') }}</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class=" @if( Request::is('admin/magazin') ) active @endif"><a href="{{ url('/admin/magazin') }}"><i
-                                class="fa fa-circle-o"></i> {{__('Liste Magasins')}}</a></li>
-                    <li class=" @if( Request::is('admin/produit-magazin*') ) active @endif"><a href="{{ url('/admin/produit-magazin') }}"><i class="fa fa-circle-o"></i>
-                            {{__('Produits / Magasin')}}</a></li>
-                </ul>
+                <a href="{{ url('/admin/magazin') }}"><i
+                                class="fa fa-briefcase"></i> {{__('Magasins')}}</a>
             </li>
             <li class="treeview @if( Request::is('admin/operation') || Request::is('admin/operation/*') ) active @endif">
                 <a href="{{ url('/admin/operation') }}"><i
-                                class="fa fa-circle-o"></i> {{__('Operations')}}</a>
+                                class="fa fa-send"></i> {{__('Operations')}}</a>
             </li>
 
             <li class="treeview @if( Request::is('admin/membre*') || Request::is('admin/membre/*')   ) active @endif">
             <a href="{{ url('/admin/membre') }}"><i
-                                class="fa fa-circle-o"></i> {{__('Membres')}}</a>
+                                class="fa fa-user-o"></i> {{__('Membres')}}</a>
             </li>
             <li class="treeview  @if( Request::is('admin/responsable/*') || Request::is('admin/responsable')  ) active @endif">
-                <a href="{{ url('/admin/responsable') }}"><i class="fa fa-circle-o"></i>
+                <a href="{{ url('/admin/responsable') }}"><i class="fa fa-user"></i>
                             {{__('Responsables')}}</a>
             </li>
 
             <li class="treeview @if( Request::is('admin/fournisseur*') || Request::is('admin/fournisseur/*') ) active @endif">
                 <a href="{{ url('/admin/fournisseur') }}"><i
-                                class="fa fa-circle-o"></i> {{__('Fournisseurs')}}</a>
+                                class="fa fa-truck"></i> {{__('Fournisseurs')}}</a>
             </li>
 
            

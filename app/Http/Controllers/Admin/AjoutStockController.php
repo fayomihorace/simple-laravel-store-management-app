@@ -79,15 +79,16 @@ class AjoutStockController extends Controller
         //update produit magazin
         $old_stock_in_magazin = DB::connection(session::get('geststock_database'))->table('geststock_produit_magazins')->
         where(['magazin'=> $requestData['magazin'], 'produit'=> $requestData['produit']])->get();
-        echo($old_stock_in_magazin);
-
+        //dd($old_stock_in_magazin."-----------");
         if( sizeof($old_stock_in_magazin)  != 0){
             DB::connection(session::get('geststock_database'))->table('geststock_produit_magazins')
             ->where(['produit' => $requestData['produit'], 'magazin'=> $requestData['magazin']])
             ->increment('stock', intval($requestData['quantite']) ); 
+            //echo("inc1 -----------");
         }
         else{
             DB::connection(session::get('geststock_database'))->table('geststock_produit_magazins')->insert(['produit' => $requestData['produit'], 'magazin'=> $requestData['magazin'], 'stock'=> intval($requestData['quantite']) ]);
+            //echo("insert -----------");
         }
         
         DB::connection(session::get('geststock_database'))->table('geststock_produits')
@@ -95,7 +96,7 @@ class AjoutStockController extends Controller
             ->increment('stock', intval($requestData['quantite']) ); 
 
         DB::connection(session::get('geststock_database'))->table('geststock_ajout_stocks')->insert(['produit' => $requestData['produit'], 'quantite' => $requestData['quantite'], 'prix' => $requestData['prix'], 'magazin'=> $requestData['magazin'], 'fournisseur'=> $requestData['fournisseur'] ]);
-    
+        
         return redirect('admin/ajout-stock')->with('flash_message', 'AjoutStock effectué!');
     }
 
@@ -148,7 +149,7 @@ class AjoutStockController extends Controller
         
         $ajoutstock = AjoutStock::findOrFail($id);
         $ajoutstock->update($requestData);
-        return redirect('admin/ajout-stock')->with('flash_message', 'AjoutStock updated!');
+        return redirect('admin/ajout-stock')->with('flash_message', 'AjoutStock modifié!');
     }
 
     /**
@@ -170,7 +171,7 @@ class AjoutStockController extends Controller
         DB::connection(session::get('geststock_database'))->table('geststock_produits')
             ->where(['id' => $ajoutstock->produit])
             ->decrement('stock', $ajoutstock->quantite); 
-
+        //return response()->json(['type'=>'danger', 'flash_message'=>'AjoutStock supprimé !']);
         return redirect('admin/ajout-stock')->with('flash_message', 'AjoutStock supprimé!');
     }
 }

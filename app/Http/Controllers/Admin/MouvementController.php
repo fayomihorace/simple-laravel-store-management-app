@@ -170,10 +170,15 @@ class MouvementController extends Controller
      */
     public function destroy(Request $r, $id)
     {
-        //update stocks
         $mouvement = Mouvement::findOrFail($id);
-
+        //update stocks
+        $this->updateMouvement($mouvement);
         Mouvement::destroy($id);
+        
+        return redirect('admin/operation/'.$r->input('operation'))->with('flash_message', 'Mouvement supprimé!');
+    }
+
+    public function updateMouvement($mouvement){
         if( $mouvement->type=='Entree de stock' ){
             DB::connection(session::get('geststock_database'))->table('geststock_produit_magazins')
             ->where(['produit' => $mouvement->produit , 'magazin'=> $mouvement->magazin ])
@@ -192,6 +197,5 @@ class MouvementController extends Controller
             ->where(['id' => $mouvement->produit  ])
             ->increment('stock', $mouvement->quantite );
         }
-        return redirect('admin/operation/'.$r->input('operation'))->with('flash_message', 'Mouvement supprimé!');
     }
 }
