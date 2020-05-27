@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Membre;
 use App\Responsable;
 use Illuminate\Http\Request;
 
@@ -53,8 +54,21 @@ class ResponsableController extends Controller
      */
     public function store(Request $request)
     {
-        
         $requestData = $request->all();
+        $requestData['nom'] = strtoupper( $requestData['nom'] );
+        $requestData['prenom'] = strtolower( $requestData['prenom'] );
+        if( Responsable::where( ['email' => $requestData['email'] ])->exists()){
+            return redirect()->back()->with('error_message', 'Un responsable avec  cette adresse email existe déja !!');  
+        }
+        if( Responsable::where( ['telephone' => $requestData['telephone'] ])->exists()){
+            return redirect()->back()->with('error_message', 'Un responsable avec ce telephone existe déja !!');  
+        }
+        if( Membre::where( ['email' => $requestData['email'] ])->exists()){
+            return redirect()->back()->with('error_message', 'Un Membre avec  cette adresse email existe déja !!');  
+        }
+        if( Membre::where( ['telephone' => $requestData['telephone'] ])->exists()){
+            return redirect()->back()->with('error_message', 'Un Membre avec ce telephone existe déja !!');  
+        }
         
         $responsable=Responsable::create($requestData);
         $responsable->update($requestData);

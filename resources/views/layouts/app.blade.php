@@ -32,6 +32,9 @@
             background: #fcfcfc;
             height: 100%;
         }
+        .swal-modal *{
+            text-align: center;
+        }
     </style>
     
 </head>
@@ -129,7 +132,9 @@
                                     '<input type="hidden" name="_method" value="'+action_+'">'+
                                     '<input type="hidden" name="_token" value="'+token+'">'+
                                     '<input type="hidden" name="operation" value="'+$(this).attr('operation')+'">'+
-                                    `<button type="submit" class="btn btn-warning" style="color: white"  title="Supprimer AjoutStock" > Continuer </button>
+                                    `<a href="javascript:swal.close()"  class="btn btn-primary" style="width:200px" >Non</a>
+                                    &nbsp&nbsp&nbsp
+                                    <button type="submit" class="btn btn-warning" style="color: white; width:200px"  title="Supprimer AjoutStock" > Oui </button>
                                 </form>`;
             swal({
                 title: "Attention, voulez vous vraiment continuer la suppression ?",
@@ -158,6 +163,9 @@
             }
         })
 
+    $('input').each(function(){
+        if($(this).attr('type')== 'number') $(this).attr('min',0)
+    })
 
     </script>
 </body>

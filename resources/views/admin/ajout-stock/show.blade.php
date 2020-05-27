@@ -26,6 +26,10 @@
                         <table class="table">
                             <tbody>
                                 <tr>
+                                    <th> Date de creation </th>
+                                    <td> <?php echo date_format($ajoutstock->created_at, "d/m/Y H:i:s"); ?> </td>
+                                </tr>
+                                <tr>
                                     <th> Produit </th>
                                     <td> {{ $ajoutstock->produit }} </td>
                                 </tr>

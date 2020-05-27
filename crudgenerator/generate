@@ -28,3 +28,6 @@ php artisan crud:generate Mouvement --fields_from_file="crudgenerator/mouvement.
 php artisan crud:generate AjoutStock --fields_from_file="crudgenerator/ajoutstock.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
 
 php artisan crud:generate Image --fields_from_file="crudgenerator/image.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html
+
+
+php artisan crud:generate CategorieImage --fields_from_file="crudgenerator/category_image.json" --view-path=admin --controller-namespace=Admin --route-group=admin --form-helper=html

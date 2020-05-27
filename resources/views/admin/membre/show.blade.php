@@ -27,7 +27,11 @@
                                     <tr>
                                         <th>ID</th><td>{{ $membre->id }}</td>
                                     </tr>
-                                    <tr><th> Nom </th><td> {{ $membre->nom }} </td></tr><tr><th> Prenom </th><td> {{ $membre->prenom }} </td></tr><tr><th> Adresse </th><td> {{ $membre->adresse }} </td></tr>
+                                    <tr><th> Nom </th><td> {{ $membre->nom }} </td></tr>
+                                    <tr><th> Prenom </th><td> {{ $membre->prenom }} </td></tr>
+                                    <tr><th> Adresse </th><td> {{ $membre->adresse }} </td></tr>
+                                    <tr><th> Email </th><td> {{ $membre->email }} </td></tr>
+                                    <tr><th> Telephone </th><td> {{ $membre->telephone }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

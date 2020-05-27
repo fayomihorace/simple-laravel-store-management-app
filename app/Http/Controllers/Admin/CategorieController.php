@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Categorie;
-use App\Produit;
+use App\CategorieImage;
 use Illuminate\Http\Request;
 
 class CategorieController extends Controller
@@ -70,9 +70,10 @@ class CategorieController extends Controller
      */
     public function show($id)
     {
+        $images = CategorieImage::where(['categorie'=>$id])->get();
         $categorie = Categorie::findOrFail($id);
 
-        return view('admin.categorie.show', compact('categorie'));
+        return view('admin.categorie.show', compact('categorie'))->with(['images'=>$images]) ;
     }
 
     /**

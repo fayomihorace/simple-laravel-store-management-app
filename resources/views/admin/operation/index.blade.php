@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td> <?php echo date_format($item->created_at, "d/m/Y H:i:s"); ?> </td>
                                     <td>{{ $item->membre }} {{ $item->membre_prenom }}</td>
                                     <td>{{ $item->responsable }} {{ $item->responsable_prenom }}</td>
                                     <td style="color: {{ $item->end === 'yes' ? 'green' : 'blue' }}">{{ $item->end === 'yes' ? 'Terminé' : 'En cours' }}</td>

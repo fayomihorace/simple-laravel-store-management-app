@@ -42,6 +42,14 @@
                                         <th> Description </th>
                                         <td> {{ $produit->description }} </td>
                                     </tr>
+                                    <tr>
+                                        <th> Stock </th>
+                                        <td> {{ $produit->stock }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Stock details</th>
+                                        <td> {{ $produit->stock_details }} </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

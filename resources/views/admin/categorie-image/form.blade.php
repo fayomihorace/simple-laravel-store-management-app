@@ -3,10 +3,10 @@
     <input class="form-control" name="lien" type="text" id="lien" value="{{ isset($image->lien) ? $image->lien : ''}}">
     {!! $errors->first('lien', '<p class="help-block">:message</p>') !!}
 </div>
-<div style="display: none" class="form-group {{ $errors->has('produit') ? 'has-error' : ''}}">
-    <label for="produit" class="control-label">{{ 'Produit' }}</label>
-    <input class="form-control" name="produit" type="number" id="produit" value="{{  $produit}}">
-    {!! $errors->first('produit', '<p class="help-block">:message</p>') !!}
+<div style="display: none" class="form-group {{ $errors->has('categorie') ? 'has-error' : ''}}">
+    <label for="categorie" class="control-label">{{ 'categorie' }}</label>
+    <input class="form-control" name="categorie" type="number" id="categorie" value="{{  $categorie}}">
+    {!! $errors->first('categorie', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group">
     <label for="recipient-name" class="control-label">Image:</label>

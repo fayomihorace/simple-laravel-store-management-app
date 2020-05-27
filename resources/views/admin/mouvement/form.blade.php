@@ -14,7 +14,7 @@
     <label for="type" class="control-label">{{ 'Produit' }}</label>
     <select name="produit" class="form-control" id="produit">
         @foreach ($produits as $produit)
-        <option value="{{ $produit->id }}">{{ $produit->nom }}</option>
+        <option value="{{ $produit->id }}">{{ $produit->nom }} / {{ $produit->produit_stock_details}}</option>
         @endforeach
     </select>
     {!! $errors->first('produit', '<p class="help-block">:message</p>') !!}

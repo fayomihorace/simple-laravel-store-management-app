@@ -28,6 +28,8 @@
                                         <th>ID</th><td>{{ $responsable->id }}</td>
                                     </tr>
                                     <tr><th> Nom </th><td> {{ $responsable->nom }} </td></tr><tr><th> Prenom </th><td> {{ $responsable->prenom }} </td></tr><tr><th> Adresse </th><td> {{ $responsable->adresse }} </td></tr>
+                                    <tr><th> Email </th><td> {{ $responsable->email }} </td></tr>
+                                    <tr><th> Telephone </th><td> {{ $responsable->telephone }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

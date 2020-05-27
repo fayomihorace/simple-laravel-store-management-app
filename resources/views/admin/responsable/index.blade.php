@@ -30,14 +30,14 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Nom</th><th>Prenom</th><th>Adresse</th><th>Actions</th>
+                                        <th>#</th><th>Nom</th><th>Prenom</th><th>Adresse</th><th>Email</th><th>Telephone</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($responsable as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->nom }}</td><td>{{ $item->prenom }}</td><td>{{ $item->adresse }}</td>
+                                        <td>{{ $item->nom }}</td><td>{{ $item->prenom }}</td><td>{{ $item->adresse }}</td><td>{{ $item->email }}</td><td>{{ $item->telephone }}</td>
                                         <td>
                                             <a href="{{ url('/admin/responsable/' . $item->id) }}" title="Voir Responsable"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Voir</button></a>
                                             <a href="{{ url('/admin/responsable/' . $item->id . '/edit') }}" title="Modifier Responsable"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</button></a>

@@ -89,11 +89,11 @@ class MouvementController extends Controller
         else{
             $last_stock_in_magazin=ProduitMagazin::where(['produit'=>intval($requestData['produit']),'magazin'=>intval($requestData['magazin']) ])->value('stock');
             if( $last_stock_in_magazin <  intval($requestData['quantite']) ){
-                return redirect()->back()->with('error_message', 'Stock insuffisant!');
+                return redirect()->back()->with('error_message', 'Stock insuffisant dans ce magazin!');
             }
             $exist=DB::connection(session::get('geststock_database'))->table('geststock_produit_magazins')->where(['produit' => intval($requestData['produit']), 'magazin'=> intval($requestData['magazin']) ])->get();
             if ( sizeof($exist)==0){
-                return redirect()->back()->with('error_message', 'Stock insuffisant !');
+                return redirect()->back()->with('error_message', 'Stock insuffisant dans ce magazin!');
             }
             else{
                 DB::connection(session::get('geststock_database'))->table('geststock_produit_magazins')
@@ -138,7 +138,7 @@ class MouvementController extends Controller
         $mouvement = Mouvement::findOrFail($id);
         $produits= Produit::all();
         $magazins= Magazin::all();
-        $types= ['Entree de stock'=>'Entree de stock', 'Sortie de stock'=>'Sortie de stock'];
+        $types= ['Retour de stock'=>'Entree de stock', 'Sortie de stock'=>'Sortie de stock'];
         return view('admin.mouvement.edit', compact('mouvement'))->with(['types'=>$types, 'produits'=>$produits, 'magazins'=>$magazins, 'operation'=> $mouvement->operation]); 
     }
 

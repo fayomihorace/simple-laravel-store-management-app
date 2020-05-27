@@ -11,6 +11,7 @@ use App\Produit;
 use App\Magazin;
 use App\Responsable;
 use App\Mouvement;
+use App\ProduitMagazin;
 use DB;
 use Session;
 use Illuminate\Http\Request;
@@ -93,7 +94,7 @@ class OperationController extends Controller
     {
         $operation = Operation::join("geststock_membres", "geststock_membres.id", "=", "geststock_operations.membre")
         ->join("geststock_responsables", "geststock_responsables.id", "=", "geststock_operations.responsable")
-        ->select("geststock_operations.id", "geststock_operations.end", 'geststock_responsables.nom as responsable', 'geststock_membres.nom as membre', 'geststock_responsables.prenom as responsable_prenom', 'geststock_membres.prenom as membre_prenom')
+        ->select("geststock_operations.id", "geststock_operations.end", 'geststock_responsables.nom as responsable', 'geststock_membres.nom as membre', 'geststock_responsables.prenom as responsable_prenom', 'geststock_membres.prenom as membre_prenom', 'geststock_operations.created_at')
         ->findOrFail($id);
         /*$mouvements = DB::connection(session::get('geststock_database'))->table('geststock_mouvements')
         ->where(['operation' => $id ])->get();*/
@@ -104,13 +105,26 @@ class OperationController extends Controller
         ->where(["geststock_mouvements.operation"=> $id])
         ->get();
         $produits= Produit::all();
+
+        foreach ($produits as $produit ) {
+            $this_produit_magazin = ProduitMagazin::join("geststock_magazins", "geststock_magazins.id", "=", "geststock_produit_magazins.magazin")
+            ->where(['produit'=>$produit->id])->where('stock', '>', 0)->get();
+            $produit_stock_details = 'Stock(';
+            foreach ($this_produit_magazin as $p ) {
+                $produit_stock_details .= $p->nom.': '.$p->stock.', ';
+            }
+            $produit_stock_details .= ')';
+            $produit->produit_stock_details = $produit_stock_details;
+            // dd($produits->produit_stock_details);
+        }
+        
         $magazins= Magazin::all();
         Session::put('operation_is_end', $operation->end );
         Session::put('operation', $operation );
-        $types= ['Sortie de stock'=>'Sortie de stock', 'Entree de stock'=>'Entree de stock'];
+        $types= ['Sortie de stock'=>'Sortie de stock', 'Retour de stock'=>'Retour de stock'];
         return view('admin.operation.show', compact('operation'))->with(['mouvements'=>$mouvements,'produits'=>$produits, 'magazins'=>$magazins, 'types'=>$types]) ;
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -174,5 +188,17 @@ class OperationController extends Controller
         ->where(['id' => $id ])
         ->update(['end' => 'yes' ]);
         return redirect()->back()->with('flash_message', 'Opération terminée!');
+    }
+
+    public function continue($id)
+    {
+        $this_operation_created_at= Operation::where(['id'=>$id])->get()[0]->created_at;
+        $nombre_operation_apres = Operation::where('created_at', '>', $this_operation_created_at)->get()->count(); 
+        if($nombre_operation_apres!=0) return redirect()->back()->with('error_message', 'Vous ne pouvez plus modifier cette opération car il existe au moins une autre opération créé apres celle ci !');
+
+        DB::connection(session::get('geststock_database'))->table('geststock_operations')
+        ->where(['id' => $id ])
+        ->update(['end' => 'no' ]);
+        return redirect()->back()->with('flash_message', 'Opération réouverte!');
     }
 }

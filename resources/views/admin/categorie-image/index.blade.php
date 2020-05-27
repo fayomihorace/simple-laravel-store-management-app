@@ -1,12 +1,12 @@
 <div class="card">
-    <div class="card-header">Images</div>
+    <div class="card-header">categorie-images</div>
     <div class="card-body">
-    <a href="#" data-toggle="modal" data-target="#addImage" class="btn btn-success btn-sm"
-            title="Ajouter une  Image">
-            <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une Image
+    <a href="#" data-toggle="modal" data-target="#addcategorie-image" class="btn btn-success btn-sm"
+            title="Ajouter une  categorie-image">
+            <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une image
         </a>
 
-        <form method="GET" action="{{ url('/admin/image') }}" accept-charset="UTF-8"
+        <form method="GET" action="{{ url('/admin/categorie-image') }}" accept-charset="UTF-8"
             class="form-inline my-2 my-lg-0 float-right" role="search">
             <div class="input-group">
                 <input type="text" class="form-control" name="search" placeholder="Recherchez..."
@@ -26,8 +26,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Image</th>
-                        <th>Produit</th>
+                        <th>categorie-image</th>
+                        <th>categorie</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -37,36 +37,36 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>
                             <div>
-                                <img  style="max-width:200px ; max-height:200px; border:1px solid rgba(0,0,0,.125); border-radius: 5px" class="text-center" src="{{ url($item->lien) }}" alt="Votre image" />
+                                <img  style="max-width:200px ; max-height:200px; border:1px solid rgba(0,0,0,.125); border-radius: 5px" class="text-center" src="{{ url($item->lien) }}" alt="Votre categorie-image" />
                             </div>
                         </td>
-                        <td>{{ $item->produit }}</td>
+                        <td>{{ $item->categorie }}</td>
                         <td>
-                            <a  data-toggle="modal" data-target="#seeImage_{{$item->id}}" class="btn-sm"
-                                 href="#" title="View Image"><button
+                            <a  data-toggle="modal" data-target="#seecategorie-image_{{$item->id}}" class="btn-sm"
+                                 href="#" title="View categorie-image"><button
                                     class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>
                                     Agrandir</button>
                             </a>
-                            <div class="modal fade" id="seeImage_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                            <div class="modal fade" id="seecategorie-image_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="exampleModalLabel1"> Image </h4>
+                                            <h4 class="modal-title" id="exampleModalLabel1"> categorie-image </h4>
                                         </div>
                                         <div class="modal-body">
                                             <div>
-                                                <img  style="width:100%; height:100%" class="text-center" src="{{ url($item->lien) }}" alt="Votre image" />
+                                                <img  style="width:100%; height:100%" class="text-center" src="{{ url($item->lien) }}" alt="Votre categorie-image" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <form method="POST" action="{{ url('/admin/image' . '/' . $item->id) }}"
+                            <form method="POST" action="{{ url('/admin/categorie-image/'.$item->id) }}"
                                 accept-charset="UTF-8" style="display:inline">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
-                                <button type="submit" class="btn btn-danger btn-sm" title="Supprimer Image"
+                                <button type="submit" class="btn btn-danger btn-sm" title="Supprimer categorie-image"
                                     onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o"
                                         aria-hidden="true"></i> Supprimer</button>
                             </form>
@@ -78,17 +78,17 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="addImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+<div class="modal fade" id="addcategorie-image" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel1"> Ajouter une Image </h4>
+                <h4 class="modal-title" id="exampleModalLabel1"> Ajouter une image </h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ url('/admin/image') }}" accept-charset="UTF-8" class="form-horizontal"
+                <form method="POST" action="{{ url('/admin/categorie-image') }}" accept-charset="UTF-8" class="form-horizontal"
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    @include ('admin.image.form', ['formMode' => 'create', 'produit'=>$produit])
+                    @include ('admin.categorie-image.form', ['formMode' => 'create', 'categorie'=>$categorie])
                 </form>
             </div>
         </div>

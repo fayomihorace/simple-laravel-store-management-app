@@ -1,0 +1,27 @@
+{
+    "fields": [
+        {
+            "name": "lien",
+            "type": "string"
+        },
+        {
+            "name": "categorie",
+            "type": "integer#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "categorie",
+            "references": "id",
+            "on": "geststock_categories",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "geststock_categories",
+            "type": "belongsTo",
+            "class": "App\\Categorie"
+        }
+    ]
+}

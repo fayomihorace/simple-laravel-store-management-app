@@ -44,6 +44,7 @@
 
                 </div>
             </div>
+            @include ('admin.categorie-image.index', ['image' => $images, 'categorie'=>$categorie->id])
         </div>
     </div>
 </div>

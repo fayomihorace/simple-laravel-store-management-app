@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Membre;
+use App\Responsable;
 use Illuminate\Http\Request;
 
 class MembreController extends Controller
@@ -55,7 +56,21 @@ class MembreController extends Controller
     {
         
         $requestData = $request->all();
-        
+        $requestData['nom'] = strtoupper( $requestData['nom'] );
+        $requestData['prenom'] = strtolower( $requestData['prenom'] );
+        if( Membre::where( ['email' => $requestData['email'] ])->exists()){
+            return redirect()->back()->with('error_message', 'Un Membre avec  cette adresse email existe déja !!');  
+        }
+        if( Membre::where( ['telephone' => $requestData['telephone'] ])->exists()){
+            return redirect()->back()->with('error_message', 'Un Membre avec ce telephone existe déja !!');  
+        }
+        if( Responsable::where( ['email' => $requestData['email'] ])->exists()){
+            return redirect()->back()->with('error_message', 'Un responsable avec  cette adresse email existe déja !!');  
+        }
+        if( Responsable::where( ['telephone' => $requestData['telephone'] ])->exists()){
+            return redirect()->back()->with('error_message', 'Un responsable avec ce telephone existe déja !!');  
+        }
+
         $membre=Membre::create($requestData);
         $membre->update($requestData);
         return redirect('admin/membre')->with('flash_message', 'Membre ajouté!');

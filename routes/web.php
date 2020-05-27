@@ -26,6 +26,7 @@ Route::post('admin/mouvement/delete/{id}  ', 'Admin\\MouvementController@destroy
 //geststock_
 
 Route::get('admin/operation/end/{id}', 'Admin\\OperationController@end')->middleware('auth');
+Route::get('admin/operation/continue/{id}', 'Admin\\OperationController@continue')->middleware('auth');
 
 Route::resource('admin/categorie', 'Admin\\CategorieController')->middleware('auth');
 Route::resource('admin/magazin', 'Admin\\MagazinController')->middleware('auth');
@@ -40,3 +41,8 @@ Route::resource('admin/ajout-stock', 'Admin\\AjoutStockController')->middleware(
 Route::resource('admin/produit', 'Admin\\ProduitController')->middleware('auth');
 Route::resource('admin/image', 'Admin\\ImageController')->middleware('auth');
 Route::resource('admin/image', 'Admin\\ImageController')->middleware('auth');
+Route::resource('admin/categorie-image', 'Admin\\CategorieImageController');
+
+Route::get('/invoice', function () {
+    return view('test');
+})->name('invoice');

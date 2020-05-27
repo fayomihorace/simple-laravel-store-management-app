@@ -47,7 +47,7 @@
                                 @foreach($ajoutstock as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td><?php echo date_format($item->created_at, "d/m/Y H:i:s"); ?></td>
                                     <td>{{ $item->produit }}</td>
                                     <td>{{ $item->quantite }}</td>
                                     <td>{{ $item->prix }}</td>
